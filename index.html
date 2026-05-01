@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>院耀辉｜AI训练师</title>
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --card: #141414;
+      --card-soft: #181818;
+      --line: #262626;
+      --blue: #3b82f6;
+      --green: #10b981;
+      --text: #e5e5e5;
+      --muted: #9ca3af;
+      --shadow: 0 22px 70px rgba(0, 0, 0, 0.42);
+      --radius: 8px;
+      --max: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 92px;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 12% 2%, rgba(59, 130, 246, 0.16), transparent 30%),
+        radial-gradient(circle at 88% 18%, rgba(16, 185, 129, 0.1), transparent 26%),
+        var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+      letter-spacing: 0;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.22;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: linear-gradient(to bottom, black, transparent 72%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .top-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      transition: background 0.24s ease, border-color 0.24s ease, backdrop-filter 0.24s ease;
+      border-bottom: 1px solid transparent;
+    }
+
+    .top-nav.is-scrolled {
+      background: rgba(10, 10, 10, 0.76);
+      border-color: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-inner {
+      width: min(var(--max), calc(100% - 40px));
+      height: 72px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      font-size: 15px;
+      font-weight: 800;
+      white-space: nowrap;
+      color: #fff;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .nav-links::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-links a {
+      flex: 0 0 auto;
+      padding: 8px 11px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 13px;
+      transition: color 0.2s ease, background 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+      background: rgba(59, 130, 246, 0.16);
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+      padding: 112px 0 72px;
+    }
+
+    .section {
+      margin-top: 82px;
+    }
+
+    .section:first-child {
+      margin-top: 0;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow {
+      margin: 0 0 7px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 16px;
+      color: #fff;
+      font-size: clamp(56px, 8vw, 96px);
+      line-height: 0.95;
+      font-weight: 900;
+    }
+
+    h2 {
+      margin-bottom: 0;
+      color: #fff;
+      font-size: clamp(26px, 3vw, 38px);
+      line-height: 1.15;
+      font-weight: 850;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      color: #fff;
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .hero-section {
+      position: relative;
+      min-height: 560px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
+      align-items: center;
+      gap: 34px;
+    }
+
+    .hero-section::after {
+      content: "";
+      position: absolute;
+      top: 92px;
+      right: 6%;
+      width: 42%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.9), rgba(16, 185, 129, 0.55), transparent);
+      box-shadow: 0 0 38px rgba(59, 130, 246, 0.45);
+      transform: rotate(-12deg);
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .hero-kicker::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.7);
+    }
+
+    .hero-subtitle {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+      color: var(--text);
+      font-size: clamp(17px, 2vw, 22px);
+      font-weight: 650;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .pill,
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 6px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--muted);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .tag.blue {
+      border-color: rgba(59, 130, 246, 0.28);
+      background: rgba(59, 130, 246, 0.13);
+      color: #bfdbfe;
+    }
+
+    .contact-card,
+    .card,
+    .timeline-item,
+    .education-card,
+    .skill-panel,
+    .award-card {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent), var(--card);
+      box-shadow: var(--shadow);
+      transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .contact-card:hover,
+    .card:hover,
+    .timeline-item:hover,
+    .education-card:hover,
+    .skill-panel:hover,
+    .award-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(59, 130, 246, 0.36);
+      box-shadow: 0 28px 86px rgba(0, 0, 0, 0.58);
+    }
+
+    .contact-card {
+      position: relative;
+      overflow: hidden;
+      padding: 24px;
+    }
+
+    .contact-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.16), rgba(16, 185, 129, 0.08), transparent 56%);
+      pointer-events: none;
+    }
+
+    .contact-card > * {
+      position: relative;
+    }
+
+    .contact-title {
+      margin-bottom: 18px;
+      color: #fff;
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      color: var(--text);
+      word-break: break-all;
+    }
+
+    .contact-link svg {
+      flex: 0 0 auto;
+      width: 22px;
+      height: 22px;
+      color: var(--blue);
+    }
+
+    .contact-link:hover span {
+      color: #fff;
+    }
+
+    .identity-note {
+      margin: 22px 0 0;
+      color: var(--green);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .advantage-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .advantage-card {
+      position: relative;
+      min-height: 178px;
+      padding: 22px 22px 22px 25px;
+      overflow: hidden;
+    }
+
+    .advantage-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      bottom: 20px;
+      width: 3px;
+      border-radius: 999px;
+      background: var(--blue);
+      box-shadow: 0 0 18px rgba(59, 130, 246, 0.62);
+    }
+
+    .card-index {
+      margin-bottom: 12px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+    }
+
+    .card p,
+    .timeline-item p,
+    .education-card p {
+      color: var(--muted);
+    }
+
+    .education-card {
+      padding: 24px;
+    }
+
+    .education-main {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 18px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .education-title {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 850;
+      color: #fff;
+    }
+
+    .course-tags,
+    .tool-tags,
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .graduation-design {
+      margin: 18px 0 0;
+      color: var(--text);
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 18px;
+      padding-left: 26px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 10px;
+      bottom: 10px;
+      width: 2px;
+      background: linear-gradient(var(--blue), rgba(59, 130, 246, 0.08));
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 22px;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -25px;
+      top: 27px;
+      width: 10px;
+      height: 10px;
+      border: 3px solid var(--bg);
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 18px rgba(59, 130, 246, 0.6);
+    }
+
+    .timeline-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 12px;
+    }
+
+    .time {
+      color: var(--muted);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .blue-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: var(--muted);
+    }
+
+    .blue-list li {
+      position: relative;
+      margin: 9px 0;
+      padding-left: 18px;
+    }
+
+    .blue-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.72em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--blue);
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .project-card {
+      padding: 24px;
+    }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0 16px;
+    }
+
+    .result {
+      color: var(--green);
+      font-weight: 800;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+      padding: 9px 12px;
+      border: 1px solid rgba(59, 130, 246, 0.32);
+      border-radius: 999px;
+      background: rgba(59, 130, 246, 0.12);
+      color: #bfdbfe;
+      font-size: 13px;
+      font-weight: 700;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .project-link:hover {
+      transform: translateY(-2px);
+      border-color: rgba(59, 130, 246, 0.64);
+      background: rgba(59, 130, 246, 0.2);
+      color: #ffffff;
+    }
+
+    .project-link svg {
+      width: 16px;
+      height: 16px;
+      flex: 0 0 auto;
+    }
+
+    .campus-timeline .timeline-item {
+      padding: 18px 20px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+      gap: 18px;
+    }
+
+    .skill-panel {
+      padding: 24px;
+    }
+
+    .skill {
+      margin-bottom: 20px;
+    }
+
+    .skill:last-child {
+      margin-bottom: 0;
+    }
+
+    .skill-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 760;
+    }
+
+    .skill-tools {
+      margin-bottom: 9px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .bar {
+      height: 8px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #242424;
+    }
+
+    .bar-fill {
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--blue), var(--green));
+      transition: width 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .skills-grid.is-visible .bar-fill {
+      width: var(--target);
+    }
+
+    .cert-list {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .cert-list li {
+      padding: 14px 15px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.035);
+      color: var(--text);
+    }
+
+    .honor-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .award-card {
+      min-height: 116px;
+      padding: 17px;
+    }
+
+    .award-year {
+      margin-bottom: 10px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .award-name {
+      color: var(--text);
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .footer {
+      position: relative;
+      z-index: 1;
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+      padding: 28px 0 42px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .back-to-top {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 60;
+      width: 46px;
+      height: 46px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      background: rgba(20, 20, 20, 0.82);
+      color: var(--text);
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+      transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease;
+      backdrop-filter: blur(12px);
+    }
+
+    .back-to-top.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+      background: rgba(59, 130, 246, 0.24);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      animation: revealUp 0.7s ease forwards;
+    }
+
+    .delay-1 { animation-delay: 0.08s; }
+    .delay-2 { animation-delay: 0.16s; }
+    .delay-3 { animation-delay: 0.24s; }
+    .delay-4 { animation-delay: 0.32s; }
+    .delay-5 { animation-delay: 0.40s; }
+    .delay-6 { animation-delay: 0.48s; }
+    .delay-7 { animation-delay: 0.56s; }
+
+    @keyframes revealUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero-section,
+      .advantage-grid,
+      .project-grid,
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-section {
+        min-height: auto;
+        padding-top: 56px;
+      }
+
+      .honor-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .timeline-head,
+      .education-main {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .time {
+        white-space: normal;
+      }
+    }
+
+    @media (max-width: 640px) {
+      main,
+      .nav-inner,
+      .footer {
+        width: min(100% - 28px, var(--max));
+      }
+
+      main {
+        padding-top: 92px;
+      }
+
+      .nav-inner {
+        height: 64px;
+        align-items: center;
+      }
+
+      .brand {
+        display: none;
+      }
+
+      .nav-links {
+        width: 100%;
+      }
+
+      .nav-links a {
+        padding: 8px 10px;
+      }
+
+      .section {
+        margin-top: 62px;
+      }
+
+      .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .hero-subtitle {
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .contact-card,
+      .card,
+      .timeline-item,
+      .education-card,
+      .skill-panel,
+      .award-card {
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.38);
+      }
+
+      .advantage-card,
+      .project-card,
+      .education-card,
+      .skill-panel {
+        padding: 20px;
+      }
+
+      .honor-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="top-nav" aria-label="页面导航">
+    <div class="nav-inner">
+      <a class="brand" href="#hero">院耀辉</a>
+      <div class="nav-links">
+        <a href="#advantages">优势</a>
+        <a href="#education">教育</a>
+        <a href="#experience">经历</a>
+        <a href="#projects">项目</a>
+        <a href="#campus">校园</a>
+        <a href="#skills">技能</a>
+        <a href="#honors">荣誉</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section id="hero" class="section hero-section reveal">
+      <div>
+        <div class="hero-kicker">2025届毕业生｜未缴纳社保</div>
+        <h1>院耀辉</h1>
+        <div class="hero-subtitle">
+          <span>AI训练师</span>
+          <span>中共党员</span>
+          <span>杭州｜随时到岗</span>
+        </div>
+        <ul class="hero-meta" aria-label="基本信息">
+          <li class="pill">河北 22岁</li>
+          <li class="pill">意向岗位：AI训练师</li>
+          <li class="pill">身份：2025届毕业生｜未缴纳社保</li>
+        </ul>
+      </div>
+
+      <aside class="contact-card reveal delay-1" aria-label="联系方式">
+        <div class="contact-title">联系方式</div>
+        <a class="contact-link" href="tel:19531238160">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M6.6 3.8 9.4 3l2 4.8-1.8 1.1c1.1 2.1 2.7 3.7 4.9 4.9l1.1-1.8 4.8 2-.8 2.8c-.3 1.1-1.3 1.8-2.4 1.7C10.3 18 5.1 12.8 4.9 5.9c0-1 .7-1.9 1.7-2.1Z"/>
+          </svg>
+          <span>19531238160</span>
+        </a>
+        <a class="contact-link" href="mailto:19531238160@163.com">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4.5 6.5h15v11h-15z"/>
+            <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="m5 7 7 5 7-5"/>
+          </svg>
+          <span>19531238160@163.com</span>
+        </a>
+        <p class="identity-note">杭州｜随时到岗</p>
+      </aside>
+    </section>
+
+    <section id="advantages" class="section reveal delay-1">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Core Strengths</p>
+          <h2>核心优势</h2>
+        </div>
+      </div>
+      <div class="advantage-grid">
+        <article class="card advantage-card">
+          <div class="card-index">01</div>
+          <p>具备政府部门跨部门数据表处理经历，每周处理上千行数据，长期负责字段核对、格式统一、缺失信息整理、归档更新，匹配AI训练师对数据准确性、规范性和耐心的要求。</p>
+        </article>
+        <article class="card advantage-card">
+          <div class="card-index">02</div>
+          <p>有AI自动化项目实践，完成新闻采集、内容筛选、LLM摘要生成、Prompt结构设计、邮件发送、定时运行和结果验证，理解从数据输入到模型输出再到人工校验的基本流程。</p>
+        </article>
+        <article class="card advantage-card">
+          <div class="card-index">03</div>
+          <p>熟悉Excel、Word、Markdown等基础工具，了解Python、Git、GitHub Actions和大模型API配置，能在AI工具辅助下完成资料整理、脚本运行、问题排查和文档维护。</p>
+        </article>
+        <article class="card advantage-card">
+          <div class="card-index">04</div>
+          <p>2025届本科毕业生，未缴纳社保，可随时到岗；愿意从AI训练、数据标注、内容审核、大模型评测等基础岗位切入，学习能力和执行稳定性较强。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="education" class="section reveal delay-2">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Education</p>
+          <h2>教育背景</h2>
+        </div>
+      </div>
+      <article class="education-card">
+        <div class="education-main">
+          <p class="education-title">河北工程大学｜地理信息科学｜本科</p>
+          <span class="time">2021.09 - 2025.06</span>
+        </div>
+        <div class="course-tags" aria-label="主修课程">
+          <span class="tag">空间数据库原理</span>
+          <span class="tag">Python编程</span>
+          <span class="tag">地图学</span>
+          <span class="tag">遥感数字图像处理</span>
+          <span class="tag">计算机基础</span>
+        </div>
+        <p class="graduation-design">毕业设计：《深圳市共享单车起讫点时空分布及作用因素研究》</p>
+      </article>
+    </section>
+
+    <section id="experience" class="section reveal delay-3">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Experience</p>
+          <h2>实习/工作经历</h2>
+        </div>
+      </div>
+      <div class="timeline">
+        <article class="timeline-item">
+          <div class="timeline-head">
+            <h3>康保县医疗保障局｜见习生</h3>
+            <span class="time">2025.09 - 至今</span>
+          </div>
+          <ul class="blue-list">
+            <li>负责跨部门数据表的整理、核对、归档与更新，每周处理上千行数据</li>
+            <li>协助完成与数政局的数据对接工作，跟进数据传递、反馈、修正等流程</li>
+            <li>参与表格数据核查、缺失信息整理、格式规范化等重复性较强的数据处理工作</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects" class="section reveal delay-4">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Projects</p>
+          <h2>项目经历</h2>
+        </div>
+      </div>
+      <div class="project-grid">
+        <article class="card project-card">
+          <div class="timeline-head">
+            <h3>AI最新热点新闻自动抓取与总结系统</h3>
+            <span class="time">2026.04</span>
+          </div>
+          <div class="project-meta">
+            <span class="tag">需求设计/配置测试/AI辅助开发实践</span>
+          </div>
+          <div class="tool-tags">
+            <span class="tag blue">Python</span>
+            <span class="tag blue">GitHub Actions</span>
+            <span class="tag blue">Markdown</span>
+            <span class="tag blue">RSS</span>
+            <span class="tag blue">NewsAPI</span>
+            <span class="tag blue">LLM API</span>
+            <span class="tag blue">SMTP</span>
+            <span class="tag blue">Git</span>
+          </div>
+          <ul class="blue-list">
+            <li><span class="result">成果：成功部署自动化简报系统，本地通过56项自动化测试</span></li>
+          </ul>
+          <a class="project-link" href="https://github.com/Xhuiz/AI-News" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7"/>
+              <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M9 7h8v8"/>
+              <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M18 13v5H6V6h5"/>
+            </svg>
+            <span>GitHub 仓库：github.com/Xhuiz/AI-News</span>
+          </a>
+        </article>
+
+        <article class="card project-card">
+          <div class="timeline-head">
+            <h3>AI训练师岗位学习资料整理与自动化表格构建</h3>
+            <span class="time">2026.04</span>
+          </div>
+          <ul class="blue-list">
+            <li><span class="result">成果：整理约600行学习计划数据，使用Excel结构化整理岗位信息</span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="campus" class="section reveal delay-5">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Campus</p>
+          <h2>校园经历</h2>
+        </div>
+      </div>
+      <div class="timeline campus-timeline">
+        <article class="timeline-item">
+          <div class="timeline-head">
+            <h3>地理信息科学3班｜班长</h3>
+            <span class="time">2021.09 - 2025.06</span>
+          </div>
+          <p>带领班级获"市级优秀班集体"</p>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-head">
+            <h3>校安全协会｜组宣部部长</h3>
+            <span class="time">2022.09 - 2023.06</span>
+          </div>
+          <p>参与活动最高线下200+人、线上5000+人</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills" class="section reveal delay-6">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Skills</p>
+          <h2>技能证书</h2>
+        </div>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-panel">
+          <div class="skill">
+            <div class="skill-head"><span>AI工具</span><span>了解 30%</span></div>
+            <div class="skill-tools">OpenClaw、Claude Code、Codex、豆包</div>
+            <div class="bar"><div class="bar-fill" style="--target: 30%"></div></div>
+          </div>
+          <div class="skill">
+            <div class="skill-head"><span>数据处理</span><span>熟悉 60%</span></div>
+            <div class="skill-tools">Excel、Word、PPT</div>
+            <div class="bar"><div class="bar-fill" style="--target: 60%"></div></div>
+          </div>
+          <div class="skill">
+            <div class="skill-head"><span>GIS工具</span><span>掌握 80%</span></div>
+            <div class="skill-tools">ArcGIS</div>
+            <div class="bar"><div class="bar-fill" style="--target: 80%"></div></div>
+          </div>
+          <div class="skill">
+            <div class="skill-head"><span>Python</span><span>了解 30%</span></div>
+            <div class="skill-tools">基础语法</div>
+            <div class="bar"><div class="bar-fill" style="--target: 30%"></div></div>
+          </div>
+          <div class="skill">
+            <div class="skill-head"><span>系统工具</span><span>了解 30%</span></div>
+            <div class="skill-tools">Linux基础命令</div>
+            <div class="bar"><div class="bar-fill" style="--target: 30%"></div></div>
+          </div>
+        </div>
+
+        <aside class="skill-panel">
+          <h3>证书</h3>
+          <ul class="cert-list">
+            <li>普通话二级乙等</li>
+            <li>机动车驾驶证</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section id="honors" class="section reveal delay-7">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Honors</p>
+          <h2>荣誉奖项</h2>
+        </div>
+      </div>
+      <div class="honor-grid">
+        <article class="award-card"><div class="award-year">2024</div><div class="award-name">优秀毕业生</div></article>
+        <article class="award-card"><div class="award-year">2023</div><div class="award-name">优秀班干部</div></article>
+        <article class="award-card"><div class="award-year">2023</div><div class="award-name">安全知识宣传先进个人</div></article>
+        <article class="award-card"><div class="award-year">2023</div><div class="award-name">校园安全知识竞赛一等奖</div></article>
+        <article class="award-card"><div class="award-year">2023</div><div class="award-name">易智瑞杯GIS竞赛优胜奖</div></article>
+        <article class="award-card"><div class="award-year">2021-2023</div><div class="award-name">连续三年三好学生</div></article>
+        <article class="award-card"><div class="award-year">2021</div><div class="award-name">心肺复苏大赛优秀奖</div></article>
+        <article class="award-card"><div class="award-year">2021</div><div class="award-name">学宪法讲宪法征文比赛三等奖</div></article>
+      </div>
+    </section>
+  </main>
+
+  <button class="back-to-top" type="button" aria-label="回到顶部">↑</button>
+  <footer class="footer">© 2025 院耀辉 · Built with AI</footer>
+
+  <script>
+    // 导航滚动状态、当前区块高亮、技能条动画和回到顶部按钮。
+    const nav = document.querySelector(".top-nav");
+    const backToTop = document.querySelector(".back-to-top");
+    const navLinks = Array.from(document.querySelectorAll(".nav-links a"));
+    const sections = navLinks
+      .map(link => document.querySelector(link.getAttribute("href")))
+      .filter(Boolean);
+    const skillsGrid = document.querySelector(".skills-grid");
+
+    function updateChrome() {
+      const scrolled = window.scrollY > 24;
+      nav.classList.toggle("is-scrolled", scrolled);
+      backToTop.classList.toggle("show", window.scrollY > window.innerHeight);
+    }
+
+    updateChrome();
+    window.addEventListener("scroll", updateChrome, { passive: true });
+
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const id = `#${entry.target.id}`;
+        navLinks.forEach(link => {
+          link.classList.toggle("active", link.getAttribute("href") === id);
+        });
+      });
+    }, {
+      rootMargin: "-35% 0px -55% 0px",
+      threshold: 0.01
+    });
+
+    sections.forEach(section => sectionObserver.observe(section));
+
+    if (skillsGrid) {
+      const skillObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            skillObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.25 });
+
+      skillObserver.observe(skillsGrid);
+    }
+  </script>
+</body>
+</html>
