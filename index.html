@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>院耀辉 | AI训练师个人简历</title>
+  <title>院耀辉 | AI产品经理助理 / FDE 助理个人主页</title>
   <style>
     :root {
       --bg: #0a0a0a;
@@ -247,9 +247,11 @@
 
     .hero-role {
       opacity: 0;
-      margin: 0 0 18px;
+      max-width: min(1100px, calc(100vw - 60px));
+      margin: 0 auto 18px;
       color: var(--accent);
-      font-size: clamp(22px, 3vw, 34px);
+      font-size: clamp(19px, 2.4vw, 30px);
+      line-height: 1.35;
       font-weight: 800;
       transform: translateY(12px);
     }
@@ -282,6 +284,12 @@
       color: var(--muted);
       font-size: 13px;
       transition: transform 0.2s ease, color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .tag-link {
+      color: #bfdbfe;
+      border-color: rgba(59, 130, 246, 0.36);
+      background: rgba(59, 130, 246, 0.12);
     }
 
     .tag:hover {
@@ -666,12 +674,12 @@
 
     .project-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 18px;
     }
 
     .flip-card {
-      min-height: 420px;
+      min-height: 660px;
       perspective: 1200px;
       cursor: pointer;
     }
@@ -680,7 +688,7 @@
       position: relative;
       width: 100%;
       height: 100%;
-      min-height: 420px;
+      min-height: 660px;
       transform-style: preserve-3d;
       transition: transform 0.7s ease;
     }
@@ -690,7 +698,7 @@
     .project-face {
       position: absolute;
       inset: 0;
-      overflow: hidden;
+      overflow: auto;
       backface-visibility: hidden;
       padding: 26px;
     }
@@ -699,6 +707,12 @@
       display: grid;
       place-items: center;
       transform: rotateY(180deg);
+    }
+
+    .project-face .row-head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
     }
 
     .gradient-line {
@@ -732,6 +746,15 @@
       color: var(--accent-2);
       font-weight: 800;
     }
+
+    .project-points {
+      margin: 14px 0 0;
+      padding-left: 17px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .project-points li { margin: 8px 0; }
 
     .flow {
       display: flex;
@@ -796,6 +819,33 @@
       display: grid;
       grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
       gap: 18px;
+    }
+
+    .skill-panel {
+      padding: 24px;
+    }
+
+    .skill-list {
+      display: grid;
+      gap: 15px;
+    }
+
+    .skill-block {
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: color-mix(in srgb, var(--text) 2%, transparent);
+    }
+
+    .skill-block h3 {
+      margin-bottom: 6px;
+      font-size: 16px;
+    }
+
+    .skill-block p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
     }
 
     .rings {
@@ -1070,7 +1120,7 @@
       .rings { grid-template-columns: 1fr; }
       .project-face { padding: 21px; }
       .flip-card,
-      .flip-inner { min-height: 520px; }
+      .flip-inner { min-height: 780px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1136,18 +1186,19 @@
     <canvas id="particleCanvas" aria-hidden="true"></canvas>
     <div class="hero-content">
       <h1><span id="typedName"></span><span class="cursor" id="cursor"></span></h1>
-      <p class="hero-role" id="heroRole">AI训练师</p>
+      <p class="hero-role" id="heroRole">AI 产品经理助理 / FDE 助理 / AI 解决方案交付 / AI 训练评测</p>
       <div class="hero-tags" id="heroTags">
         <span class="tag">中共党员</span>
         <span class="tag">河北</span>
         <span class="tag">22岁</span>
         <span class="tag">2025届毕业生</span>
+        <span class="tag">未缴纳社保</span>
         <span class="tag">随时到岗</span>
       </div>
       <div class="metrics">
         <div class="metric" data-target="1000" data-suffix="+"><span class="metric-num">0</span><span class="metric-label">每周处理数据行数</span></div>
-        <div class="metric" data-target="56"><span class="metric-num">0</span><span class="metric-label">自动化测试项</span></div>
-        <div class="metric" data-target="600"><span class="metric-num">0</span><span class="metric-label">学习计划数据行</span></div>
+        <div class="metric" data-target="67"><span class="metric-num">0</span><span class="metric-label">pytest 通过项</span></div>
+        <div class="metric" data-target="196"><span class="metric-num">0</span><span class="metric-label">小程序 Vitest 通过项</span></div>
         <div class="metric" data-target="5000" data-suffix="+"><span class="metric-num">0</span><span class="metric-label">活动最高线上参与人数</span></div>
       </div>
     </div>
@@ -1165,19 +1216,22 @@
       </div>
       <div class="grid-2">
         <article class="card statement">
-          <p>我是一名2025届毕业生，正在转型AI领域。在政府部门的数据处理经历让我养成了严谨细致的工作习惯，AI自动化项目实践让我理解了从数据输入到模型输出的完整流程。我愿意从基础岗位切入，用执行力和学习力证明自己。</p>
+          <p>2025届地理信息科学本科，具备政府部门跨部门数据处理经历，也有多项 Codex 辅助的 AI 产品和自动化实践。能把模糊需求拆成数据输入、模型处理、结果校验、文档维护和测试验证等步骤，熟悉 Prompt 设计、LLM API 配置、GitHub Actions、Markdown、基础 Python 和 Git 工作流。目标从 AI 产品助理、FDE 助理、AI 解决方案交付或 AI 训练评测岗位切入。</p>
           <div class="tags">
             <span class="tag">电话：19531238160</span>
             <span class="tag">邮箱：19531238160@163.com</span>
             <span class="tag">年龄/籍贯：河北 22岁</span>
-            <span class="tag">意向城市：杭州｜随时到岗</span>
+            <span class="tag">随时到岗</span>
             <span class="tag">2025届毕业生｜未缴纳社保</span>
+            <a class="tag tag-link" href="https://xhuiz.github.io/jianli/" target="_blank" rel="noopener">个人主页</a>
+            <a class="tag tag-link" href="https://github.com/Xhuiz/AI-News" target="_blank" rel="noopener">AI-News 仓库</a>
           </div>
         </article>
         <div class="identity-grid">
-          <article class="card identity-card"><span class="css-icon grid"></span><div><h3>数据严谨</h3><p class="muted">每周处理上千行数据，零差错意识</p></div></article>
-          <article class="card identity-card"><span class="css-icon ai"></span><div><h3>AI实践</h3><p class="muted">完整项目从0到1部署上线</p></div></article>
-          <article class="card identity-card"><span class="css-icon fast"></span><div><h3>快速学习</h3><p class="muted">独立掌握多款AI工具链</p></div></article>
+          <article class="card identity-card"><span class="css-icon grid"></span><div><h3>流程拆解</h3><p class="muted">把开放需求拆成模块、计划和验收清单</p></div></article>
+          <article class="card identity-card"><span class="css-icon ai"></span><div><h3>AI 产品实践</h3><p class="muted">Codex 辅助完成原型、自动化和文档</p></div></article>
+          <article class="card identity-card"><span class="css-icon grid"></span><div><h3>数据处理</h3><p class="muted">每周处理上千行数据，重视字段和状态核对</p></div></article>
+          <article class="card identity-card"><span class="css-icon fast"></span><div><h3>测试验证</h3><p class="muted">通过失败日志定位配置、接口和中文输出问题</p></div></article>
         </div>
       </div>
     </section>
@@ -1185,10 +1239,10 @@
     <section class="section" id="advantages" style="--delay: 0.05s">
       <div class="section-head"><div><p class="eyebrow">Strengths</p><h2>核心优势</h2></div></div>
       <div class="advantage-grid">
-        <article class="card advantage"><p>具备政府部门跨部门数据表处理经历，每周处理上千行数据，长期负责字段核对、格式统一、缺失信息整理、归档更新，匹配AI训练师对数据准确性、规范性和耐心的要求。</p></article>
-        <article class="card advantage"><p>有AI自动化项目实践，完成新闻采集、内容筛选、LLM摘要生成、Prompt结构设计、邮件发送、定时运行和结果验证，理解从数据输入到模型输出再到人工校验的基本流程。</p></article>
-        <article class="card advantage"><p>熟悉Excel、Word、Markdown等基础工具，了解Python、Git、GitHub Actions和大模型API配置，能在AI工具辅助下完成资料整理、脚本运行、问题排查和文档维护。</p></article>
-        <article class="card advantage"><p>2025届本科毕业生，未缴纳社保，可随时到岗；愿意从AI训练、数据标注、内容审核、大模型评测等基础岗位切入，学习能力和执行稳定性较强。</p></article>
+        <article class="card advantage"><p>业务流程拆解：能把“每天获取 AI 新闻”“根据用户需求规划路线”等开放需求拆成可执行模块，并输出实施计划、README、验收清单和测试用例。</p></article>
+        <article class="card advantage"><p>AI 工具实践：使用 Codex、Claude Code、OpenClaw、豆包等工具完成脚本搭建、产品原型、提示词整理、问题排查和文档维护，具备 Vibe Coding 实操经验。</p></article>
+        <article class="card advantage"><p>数据处理基础：在政府部门见习期间长期处理跨部门数据表，每周处理上千行数据，负责字段核对、格式统一、缺失信息整理和归档更新。</p></article>
+        <article class="card advantage"><p>测试与验证意识：个人项目中通过自动化测试验证主要流程，能够根据失败日志定位配置、接口、分支、定时任务和中文输出问题。</p></article>
       </div>
     </section>
 
@@ -1210,11 +1264,12 @@
       <div class="section-head"><div><p class="eyebrow">Experience</p><h2>实习/工作经历</h2></div></div>
       <div class="work-timeline">
         <article class="card timeline-item">
-          <div class="row-head"><h3>康保县医疗保障局｜见习生</h3><span class="time">2025.09 - 至今</span></div>
+          <div class="row-head"><h3>康保县医疗保障局｜办公室见习生</h3><span class="time">2025.09 - 至今</span></div>
           <ul class="blue-list">
-            <li>负责跨部门数据表的整理、核对、归档与更新，每周处理上千行数据</li>
-            <li>协助完成与数政局的数据对接工作，跟进数据传递、反馈、修正等流程</li>
-            <li>参与表格数据核查、缺失信息整理、格式规范化等重复性较强的数据处理工作</li>
+            <li>负责跨部门数据表的整理、核对、归档与更新，每周处理上千行数据，保证字段信息准确、格式统一、资料完整。</li>
+            <li>协助完成与数政局的数据对接工作，跟进数据传递、反馈、修正等流程，提升跨部门沟通与信息处理效率。</li>
+            <li>参与表格数据核查、缺失信息整理、格式规范化等重复性较强的数据处理工作，养成“来源、字段、状态、处理结果”逐项核对的工作习惯。</li>
+            <li>工作中注重准确率、流程规范和耐心执行，匹配 AI 训练、数据标注、内容审核、大模型评测等岗位对数据质量的要求。</li>
           </ul>
         </article>
       </div>
@@ -1227,15 +1282,20 @@
           <div class="flip-inner">
             <div class="card project-face">
               <div class="gradient-line"></div>
-              <div class="row-head"><h3>AI最新热点新闻自动抓取与总结系统</h3><span class="time">2026.04</span></div>
-              <p class="muted">角色：需求设计/配置测试/AI辅助开发实践</p>
+              <div class="row-head"><h3>AI 最新热点新闻自动抓取与总结系统</h3><span class="time">2026.04 - 2026.06</span></div>
+              <p class="muted">个人 AI 自动化项目｜角色：需求拆解、Prompt 设计、配置测试、AI 辅助开发</p>
               <div class="tool-tags">
                 <span class="tool lang">Python</span><span class="tool platform">GitHub Actions</span><span class="tool lang">Markdown</span><span class="tool service">RSS</span><span class="tool service">NewsAPI</span><span class="tool service">LLM API</span><span class="tool service">SMTP</span><span class="tool platform">Git</span>
               </div>
-              <p class="result">✓ 成功部署自动化简报系统，本地通过56项自动化测试</p>
+              <ul class="project-points">
+                <li>将“每日获取 AI 热点并总结”拆解为抓取、去重、模型总结、邮件发送、报告保存和定时运行。</li>
+                <li>设计中文 Markdown 简报 Prompt，约束“今日速览、重点新闻、概念补充、代码示例、原始链接”等结构。</li>
+                <li>配置 AI_API_KEY、AI_BASE_URL、AI_MODEL、SMTP 和 GitHub Actions，处理 workflow、默认分支和中文输出问题。</li>
+              </ul>
+              <p class="result">✓ 当前包含 16 份本地日报文件，67 项 pytest 通过</p>
             </div>
             <div class="card project-face back">
-              <div class="flow"><span class="flow-node">新闻采集</span><span class="flow-arrow">→</span><span class="flow-node">内容筛选</span><span class="flow-arrow">→</span><span class="flow-node">模型总结</span><span class="flow-arrow">→</span><span class="flow-node">邮件发送</span><span class="flow-arrow">→</span><span class="flow-node">定时执行</span></div>
+              <div class="flow"><span class="flow-node">新闻抓取</span><span class="flow-arrow">→</span><span class="flow-node">去重筛选</span><span class="flow-arrow">→</span><span class="flow-node">Prompt 摘要</span><span class="flow-arrow">→</span><span class="flow-node">邮件发送</span><span class="flow-arrow">→</span><span class="flow-node">报告保存</span><span class="flow-arrow">→</span><span class="flow-node">定时运行</span></div>
             </div>
           </div>
         </article>
@@ -1244,12 +1304,38 @@
           <div class="flip-inner">
             <div class="card project-face">
               <div class="gradient-line purple"></div>
-              <div class="row-head"><h3>AI训练师岗位学习资料整理与自动化表格构建</h3><span class="time">2026.04</span></div>
-              <div class="tool-tags"><span class="tool lang">Excel</span><span class="tool platform">结构化整理</span><span class="tool service">岗位信息</span></div>
-              <p class="result">✓ 整理约600行学习计划数据，使用Excel结构化整理岗位信息</p>
+              <div class="row-head"><h3>自由出行路线规划 Agent / 微信小程序</h3><span class="time">2026.05 - 2026.06</span></div>
+              <p class="muted">Codex 辅助产品原型项目｜角色：需求拆解、路线 Agent 策略设计、测试验证</p>
+              <div class="tool-tags"><span class="tool service">Codex</span><span class="tool lang">TypeScript</span><span class="tool lang">React/Vite</span><span class="tool platform">Taro</span><span class="tool platform">微信小程序</span><span class="tool service">云函数</span><span class="tool service">高德地图</span><span class="tool platform">Vitest</span></div>
+              <ul class="project-points">
+                <li>从“附近轻松转转”“找个热闹商场”“VR 体验”等输入出发，梳理路线对比、详情页、行程执行、收藏和社区流程。</li>
+                <li>参与设计路线 Agent 的需求分析链路，包括追问判断、POI 检索、候选路线生成、证据校验和本地 fallback。</li>
+                <li>使用 Codex 子 Agent、计划文档和审查流程，把需求拆成可信点位库、意图解析、路线指标估算、候选校验等任务。</li>
+              </ul>
+              <p class="result">✓ 小程序 41 个测试文件、196 项 Vitest 通过；路线 Agent 28 项 Vitest 通过</p>
             </div>
             <div class="card project-face back">
-              <div class="flow"><span class="flow-node">资料收集</span><span class="flow-arrow">→</span><span class="flow-node">信息筛选</span><span class="flow-arrow">→</span><span class="flow-node">表格结构化</span><span class="flow-arrow">→</span><span class="flow-node">学习计划</span><span class="flow-arrow">→</span><span class="flow-node">持续更新</span></div>
+              <div class="flow"><span class="flow-node">用户输入</span><span class="flow-arrow">→</span><span class="flow-node">意图识别</span><span class="flow-arrow">→</span><span class="flow-node">POI 检索</span><span class="flow-arrow">→</span><span class="flow-node">路线生成</span><span class="flow-arrow">→</span><span class="flow-node">证据校验</span><span class="flow-arrow">→</span><span class="flow-node">行程执行</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="flip-card clickable" tabindex="0">
+          <div class="flip-inner">
+            <div class="card project-face">
+              <div class="gradient-line"></div>
+              <div class="row-head"><h3>其他 Codex 实践</h3><span class="time">2026.05 - 2026.06</span></div>
+              <p class="muted">工具、个人主页与提示词学习｜工具：HTML、CSS、JavaScript、GitHub Pages、Codex、WPF/.NET</p>
+              <div class="tool-tags"><span class="tool lang">HTML</span><span class="tool lang">CSS</span><span class="tool lang">JavaScript</span><span class="tool platform">GitHub Pages</span><span class="tool service">Codex</span><span class="tool platform">WPF/.NET</span></div>
+              <ul class="project-points">
+                <li>生成并发布单页响应式个人主页，支持导航、技能条、联系方式跳转和项目链接。</li>
+                <li>参考开源项目梳理 Codex Focus Windows 工具需求，围绕 transcript 读取、任务状态判断和窗口匹配做设计与测试。</li>
+                <li>围绕“一句话生成完整提示词”短视频保存原始素材并提取 26 张关键帧，拆解提示词结构和任务约束。</li>
+              </ul>
+              <p class="result">✓ 形成“简历正文 + 个人主页 + 项目仓库”的求职材料组合</p>
+            </div>
+            <div class="card project-face back">
+              <div class="flow"><span class="flow-node">简历内容</span><span class="flow-arrow">→</span><span class="flow-node">个人主页</span><span class="flow-arrow">→</span><span class="flow-node">项目仓库</span><span class="flow-arrow">→</span><span class="flow-node">工具需求</span><span class="flow-arrow">→</span><span class="flow-node">Prompt 模板</span></div>
             </div>
           </div>
         </article>
@@ -1267,12 +1353,14 @@
     <section class="section" id="skills" style="--delay: 0.3s">
       <div class="section-head"><div><p class="eyebrow">Skills</p><h2>技能证书</h2></div></div>
       <div class="skills-layout">
-        <div class="card rings">
-          <div class="ring" data-percent="30"><svg viewBox="0 0 120 120"><circle class="track" cx="60" cy="60" r="50" fill="none" stroke-width="9"/><circle class="progress" cx="60" cy="60" r="50" fill="none" stroke-width="9" stroke-linecap="round"/></svg><div class="ring-center">0%</div><div class="ring-name">AI工具</div><div class="ring-tools">OpenClaw、Claude Code、Codex、豆包</div></div>
-          <div class="ring" data-percent="60" data-color="green"><svg viewBox="0 0 120 120"><circle class="track" cx="60" cy="60" r="50" fill="none" stroke-width="9"/><circle class="progress" cx="60" cy="60" r="50" fill="none" stroke-width="9" stroke-linecap="round"/></svg><div class="ring-center">0%</div><div class="ring-name">数据处理</div><div class="ring-tools">Excel、Word、PPT</div></div>
-          <div class="ring" data-percent="80" data-color="warn"><svg viewBox="0 0 120 120"><circle class="track" cx="60" cy="60" r="50" fill="none" stroke-width="9"/><circle class="progress" cx="60" cy="60" r="50" fill="none" stroke-width="9" stroke-linecap="round"/></svg><div class="ring-center">0%</div><div class="ring-name">GIS工具</div><div class="ring-tools">ArcGIS</div></div>
-          <div class="ring" data-percent="30"><svg viewBox="0 0 120 120"><circle class="track" cx="60" cy="60" r="50" fill="none" stroke-width="9"/><circle class="progress" cx="60" cy="60" r="50" fill="none" stroke-width="9" stroke-linecap="round"/></svg><div class="ring-center">0%</div><div class="ring-name">Python</div><div class="ring-tools">基础语法</div></div>
-          <div class="ring" data-percent="30" data-color="green"><svg viewBox="0 0 120 120"><circle class="track" cx="60" cy="60" r="50" fill="none" stroke-width="9"/><circle class="progress" cx="60" cy="60" r="50" fill="none" stroke-width="9" stroke-linecap="round"/></svg><div class="ring-center">0%</div><div class="ring-name">系统工具</div><div class="ring-tools">Linux基础命令</div></div>
+        <div class="card skill-panel">
+          <div class="skill-list">
+            <article class="skill-block"><h3>AI 与产品实践</h3><p>Prompt 设计、LLM API 配置、AI Agent 需求拆解、工作流自动化、Vibe Coding、项目 README / 需求文档 / 验收清单编写。</p></article>
+            <article class="skill-block"><h3>AI 工具</h3><p>Codex、Claude Code、OpenClaw、豆包；持续学习 RAG 知识库、Agent 工作流和工具调用基础概念。</p></article>
+            <article class="skill-block"><h3>数据与办公</h3><p>Excel、Word、PPT、Markdown；能够完成表格核对、资料归档、信息结构化和文档维护。</p></article>
+            <article class="skill-block"><h3>编程与工程</h3><p>Python 基础、Git、GitHub Actions、TypeScript / React / Taro 基础阅读与 AI 辅助调整。</p></article>
+            <article class="skill-block"><h3>GIS 工具</h3><p>ArcGIS 基础操作，具备空间数据处理、专题制图和可视化分析经验。</p></article>
+          </div>
         </div>
         <aside class="card certs">
           <h3>证书</h3>
